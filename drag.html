@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .two{
+            width: 800px;
+            height: 800px;
+            border: 1px solid orange;
+            position: relative;
+        }
+        .one{
+            width: 200px;
+            height: 200px;
+            background-color: rebeccapurple;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="two">
+        <div class="one"></div>
+    </div>
+    
+    <script src="drag.js"></script>
+    <script>
+        
+        // var div=document.querySelector(".one");
+        // div.onmousedown=function(ev){
+        //     var cx=ev.clientX;
+        //     var cy=ev.clientY;
+        //     var ox=div.offsetLeft;
+        //     var oy=div.offsetTop;
+
+        //     var downx=cx-ox;
+        //     var downy=cy-oy;
+        //     document.onmousemove=function(ev){
+        //         var movex=ev.clientX;
+        //         var movey=ev.clientY;
+        //         div.style.left=movex-downx+"px";
+        //         div.style.top=movey-downy+"px";
+        //         ev.preventDefault();//终止浏览器的默认行为
+        //     }
+        //     document.onmouseup=function(){
+                
+        //         document.onmousemove=null;
+        //         document.onmouseup=null;
+        //     }
+        // }
+
+        var dragObj=new drag(".one");
+        // dragObj.y=false;
+        dragObj.side.x1=0;
+        dragObj.side.x2=600;
+        dragObj.side.y1=0;
+        dragObj.side.y2=600;
+        
+        dragObj.move(function(){
+            // dragObj.ele.style.background="orange";
+            this.style.background="orange";
+        });
+    
+    </script>
+</body>
+</html>

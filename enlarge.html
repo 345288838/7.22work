@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 730px;
+            height: 460px;
+            border: 1px solid black;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .demo{
+            width: 320px;
+            height: 440px;
+            float: left;
+            margin-top: 10px;
+            margin-left: 30px;
+            position: relative;
+        }
+        .box img{
+            width: 100%;
+            height: 100%;
+        }
+        .big-box img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+        }
+        .big-box{
+            margin-top: 10px;
+            margin-left: 30px;
+            float: left;
+            width: 320px;
+            height: 440px;
+            display: none;
+            overflow: hidden;
+            position: relative;
+        }
+        .float-box{
+            display: none;
+            /* float: left; */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 80px;
+            height: 110px;
+            background-color: #000;
+            opacity: .3;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="box"> -->
+        <div class="demo">
+            <img src="./p1.png" alt="">
+            <div class="float-box"></div>
+        </div>
+        <div class="big-box"><img src="./p1.png" alt=""></div>      
+    <!-- </div> -->
+
+    <script>
+        var leftbox=document.querySelector(".demo");
+        var rightbox=document.querySelector(".big-box");
+        var rimg=rightbox.querySelector("img");
+        console.log(rimg);
+        var box=document.querySelector(".float-box");
+        // console.log(left.offsetTop);
+        function getPosition(ev){
+            var top=ev.clientY-leftbox.offsetTop-box.offsetHeight/2;
+            var left=ev.clientX-leftbox.offsetLeft-box.offsetWidth/2;
+
+            var maxtop=leftbox.offsetHeight-box.offsetHeight;
+            var maxleft=leftbox.offsetWidth-box.offsetWidth;
+            var mintop=0;
+            var minleft=0;
+            var mvtop;
+            var mvleft;
+
+            if(top<mintop){
+                box.style.top=mintop="px";
+                mvtop=mintop;
+            }else if(top>maxtop){
+                box.style.top=maxtop+"px";
+                mvtop=maxtop;
+            }else{
+                box.style.top=top+"px";
+                mvtop=top;
+            }
+            if(left<minleft){
+                box.style.left=minleft+"px";
+                mvleft=minleft;
+            }else if(left>maxleft){
+                box.style.left=maxleft+"px";
+                mvleft=maxleft;
+            }else{
+                box.style.left=left+"px";
+                mvleft=left;
+            }
+            rimg.style.top=-mvtop*2+"px";
+            // console.log(rimg.top);
+            rimg.style.left=-mvleft*2+"px";
+        }
+        leftbox.onmousemove=function(ev){
+            box.style.display="block";
+            getPosition(ev);
+            rightbox.style.display="block";
+        }
+        leftbox.onmouseout=function(ev){
+            box.style.display="none";
+            rightbox.style.display="none";
+        }
+    </script>
+</body>
+</html>
